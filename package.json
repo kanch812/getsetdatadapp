@@ -1,0 +1,21 @@
+{
+  "name": "getsetdatadapp",
+  "version": "1.0.0",
+  "description": "a simple DApp to get set Data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "DApp"
+  ],
+  "author": "Kanchan Khatri",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.4"
+  },
+  "dependencies": {
+    "ethers": "^6.10.0"
+  }
+}

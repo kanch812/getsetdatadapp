@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DApp to Get and Set Data! </title>
+    <link rel="stylesheet" href="styles.css">
+ 
+</head>
+<body>
+    <div>
+        <h1> Creating a Simple DApp! </h1>
+        <p> Please enter any data in the below field </p>
+        <label for="_data">Input data </label>
+        <input type="text" id="_data"/>
+        <button onclick="setData()"> Set Data </button>
+        <button onclick="getData()">Get Data </button>
+        <p id="showData"></p>
+    </div>
+  
+</body>
+
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+type="application/javascript"></script>
+
+<script>
+    // constract address, contract abi, metamask 
+    const contractAddress ="0x077Dd10b65653b604711d634e954C32AA3534fe6" ;
+    const contractABI =  [
+    {
+      "inputs": [],
+      "name": "data",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getData",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "a",
+          "type": "uint256"
+        }
+      ],
+      "name": "setData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ];
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  provider.send("eth_requestAccounts", []);
+  const signer = provider.getSigner();
+
+  const setgetcontract = new ethers.Contract(contractAddress, contractABI, signer);
+
+  async function setData(){
+    const data = document.getElementById("_data").value;
+    await setgetcontract.setData(data);
+  }
+  async function getData(){
+    
+    const data = await setgetcontract.getData();
+    document.getElementById("showData").innerText = ` Data : ${data} ` ;
+   
+  }
+
+
+</script>
+
+
+</html>
